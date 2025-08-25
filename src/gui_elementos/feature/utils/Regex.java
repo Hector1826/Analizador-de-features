@@ -20,7 +20,7 @@ public class Regex {
     /**
      * Expression regular para encontrar el nombre de un Gherkin.
      */
-    public static final String NAME_GHERKIN_REGEX = "Scenario(?: Outline)?:\\s*(.*)$";
+    public static final String NAME_GHERKIN_REGEX = "Scenario(?: Outline)?:\\s*(.+)";
 
     /**
      * Expression regular para encontrar el nombre de un escenario.

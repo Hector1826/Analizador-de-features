@@ -1,6 +1,6 @@
 package gui_elementos.feature.utils;
 
-import gui_elementos.feature.view.GUIElements;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,7 +13,7 @@ import javax.swing.JFileChooser;
  * @author "Hector Hdez E."
  */
 public class FileControl {
-    private JFileChooser fileChooser;
+    private final JFileChooser fileChooser;
     
     public FileControl(){
         this.fileChooser = new JFileChooser();
@@ -22,10 +22,10 @@ public class FileControl {
     /**
      * Abre ventana para seleccionar el archivo que se requiere analizar
      */
-    private File selectFile(GUIElements v) {
+    private File selectFile( ) {
         File directorioInicial = new File("/Users/mtptulamac007/Desktop/Releases repor/R25.80-Spherica/glomo-mx/test/e2e/lib/features/epics"); // Reemplaza con la ruta deseada
         fileChooser.setCurrentDirectory(directorioInicial);
-        int seleccion = fileChooser.showOpenDialog(v);
+        int seleccion = fileChooser.showOpenDialog(null);
         File archivo = null;
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             archivo = fileChooser.getSelectedFile();
@@ -41,12 +41,10 @@ public class FileControl {
      * @param v
      * @return Contenido del archivo en un String
      */
-    public String mostrarContenido(GUIElements v ) {
-        
+    public String mostrarContenido( ) {    
         StringBuilder contenido = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(selectFile(v)))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(selectFile()))) {
             String linea;
-            
             while ((linea = reader.readLine()) != null) {
                 contenido.append(linea).append("\n");
             }

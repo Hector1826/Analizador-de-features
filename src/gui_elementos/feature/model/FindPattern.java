@@ -47,9 +47,9 @@ public class FindPattern {
      * @return Retorna la coincidencia encontrada
      */
     public String getCoincidencie(String pat){
-        pattern = Pattern.compile(pat);
+        pattern = Pattern.compile(pat, Pattern.MULTILINE);
         matcher = pattern.matcher(data);
-        return matcher.find() ? matcher.group() : "";
+        return matcher.find() ? matcher.group().trim() : "";
     }
     
     /**
@@ -61,10 +61,10 @@ public class FindPattern {
     public String getCoincidencie(String pat, int index){
         pattern = Pattern.compile(pat, Pattern.MULTILINE);
         matcher = pattern.matcher(data);
-        return matcher.find() ? matcher.group(index) : "";
+        return matcher.find() ? matcher.group(index).trim() : "";
     }
     
-     /**
+    /**
      * Obtiene lista de coincidencias encontradas
      * @param pat Patron a buscar
      * @param index Indice del grupo de la coincidencia a retornar
@@ -79,30 +79,4 @@ public class FindPattern {
         }
         return items;
     }
-    
-    /*
-    public List<String> table(String pat, String item){
-        items = new ArrayList<>();
-        String [] lines = item.trim().split("\n");
-        boolean isFind = false;
-        for(String l : lines){
-            if(pat.equalsIgnoreCase(l.trim())){
-                isFind = true;
-            }else if(isFind){
-                items.add(l);
-            }
-        }
-        return items;
-    }
-    
-    public String[] cleanData(String[] row){
-        String [] newRow = new String[row.length];
-        for(int i = 0; i < row.length; i++){
-            if(!row[i].isEmpty() || !row[i].isBlank() || null != row[i]){
-                newRow[i] = row[i];
-            }
-        }
-        return newRow;
-    }
-    */
 }

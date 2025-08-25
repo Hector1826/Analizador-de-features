@@ -2,6 +2,7 @@
 
 package gui_elementos.feature;
 import gui_elementos.feature.view.GUIElements;
+import gui_elementos.feature.view.View;
 
 /**
  * 
@@ -15,7 +16,7 @@ public class GUI_ElementosFeature {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new GUIElements().setVisible(true);
+        new View().setVisible(true);
     }
 
 }

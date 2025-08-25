@@ -10,6 +10,7 @@ import gui_elementos.feature.vo.Gherkin;
 import javax.swing.JFrame;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -31,7 +32,7 @@ public class GUIElements extends JFrame {
         iniTabla("Tag,Name,Factible,Outline,Manual".split(","));
         setLocationRelativeTo(null);
         setEnableBtn(false);
-
+        txtOtros.setVisible(false);
     }
 
     private void setEnableBtn(boolean flag) {
@@ -42,7 +43,6 @@ public class GUIElements extends JFrame {
         txtFactible.setText("");
         txtManual.setText(String.valueOf(featureControl.gherkinsManuales()));
         txtOutline.setText(String.valueOf(featureControl.gherkinsOutline()));
-        txtOtros.setText("");
     }
 
     private void iniTabla(String[] headers) {
@@ -71,6 +71,18 @@ public class GUIElements extends JFrame {
             temp = "Error";
         }
         return temp;
+    }
+    /**
+     * Limpia los componentes de la vista
+     */
+    private void cleanerComponents(){
+        tbInfo.setModel(new DefaultTableModel(",".split(","), 5));
+        txtConsola.setText("");
+        txtShow.setText("");
+         txtFactible.setText("");
+        txtManual.setText("");
+        txtOutline.setText("");
+        txtOtros.setText("");
     }
 
     /**
@@ -368,8 +380,8 @@ public class GUIElements extends JFrame {
 
     private void btnSelectFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectFileActionPerformed
         // TODO add your handling code here:
-        txtShow.setText(null);
-        txtShow.setText(new FileControl().mostrarContenido(this));
+        cleanerComponents();
+        txtShow.setText(new FileControl().mostrarContenido());
         featureControl = new FeatureControl(txtShow.getText());
         featureControl.show("NAME_FEATURE");
         featureControl.show("TOTAL_GHERKINS");

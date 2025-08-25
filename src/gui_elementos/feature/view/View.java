@@ -1,20 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package gui_elementos.feature.view;
+
+import gui_elementos.feature.control.FeatureControl;
+import javax.swing.JFrame;
+import gui_elementos.feature.utils.FileControl;
+import gui_elementos.feature.utils.HelperTable;
+import gui_elementos.feature.vo.Gherkin;
 
 /**
  *
  * @author mtptulamac007
  */
-public class View extends javax.swing.JFrame {
+public class View extends JFrame {
+    
+    private final FileControl fileControl;
+    private FeatureControl featureControl;
+    private HelperTable helperTB;
+    private String featureText;
 
     /**
      * Creates new form View
      */
     public View() {
         initComponents();
+        setLocationRelativeTo(null);
+        fileControl = new FileControl();
+        helperTB = new HelperTable(tbGherkin);
+        featureText = "";
+    }
+    
+    private void setDataFeature(String fac, FeatureControl _featureControl) {
+        txtNameFeature.setText(fac);
+        txtManual.setText(_featureControl.gherkinsManuales() + "");
+        txtOutline.setText(_featureControl.gherkinsOutline() + "");
+        txtFactible.setText("" + helperTB.getFactibles());
     }
 
     /**
@@ -27,49 +46,155 @@ public class View extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        listView = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnArchivo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbGherkin = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtScreen = new javax.swing.JTextArea();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtNameFeature = new javax.swing.JTextField();
+        txtFactible = new javax.swing.JTextField();
+        txtOutline = new javax.swing.JTextField();
+        txtManual = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        nameFeature = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Menu"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Menu")));
+
+        listView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "All", "Outlines", "Manual", "@baken-smoke" }));
+        listView.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listViewItemStateChanged(evt);
+            }
+        });
+
+        jLabel1.setText("Ver:");
+
+        btnArchivo.setText("Archivo");
+        btnArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArchivoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addComponent(listView, 0, 134, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 161, Short.MAX_VALUE)
-        );
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Información"));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 556, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnArchivo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(listView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), null));
+
+        tbGherkin.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbGherkin.setCellSelectionEnabled(true);
+        jScrollPane2.setViewportView(tbGherkin);
+
+        txtScreen.setColumns(20);
+        txtScreen.setRows(5);
+        jScrollPane3.setViewportView(txtScreen);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1293, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Información")));
+        jPanel4.setToolTipText("");
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("# Gherkin Totales");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 25, -1, -1));
+
+        jLabel3.setText("# Gherkis Manual");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        jLabel4.setText("# Gherkis Outline");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+
+        jLabel5.setText("# @baken-smoke");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
+
+        txtNameFeature.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        txtNameFeature.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel4.add(txtNameFeature, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 90, 50));
+
+        txtFactible.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        txtFactible.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel4.add(txtFactible, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 90, 50));
+
+        txtOutline.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        txtOutline.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel4.add(txtOutline, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 90, 50));
+
+        txtManual.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        txtManual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel4.add(txtManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 90, 50));
+        jPanel4.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 133, 10));
+        jPanel4.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 133, 10));
+        jPanel4.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 131, 11));
+
+        nameFeature.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        nameFeature.setText("jLabel6");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,11 +203,16 @@ public class View extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nameFeature)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,17 +220,80 @@ public class View extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(nameFeature)
+                        .addGap(39, 39, 39))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * Metodo que se ejecuta al cambiar el valor seleccionado de la lista
+     */
+    private void listViewItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listViewItemStateChanged
+        // TODO add your handling code here:
+        int total = 0;
+        int fac = 0;
+        switch (listView.getSelectedItem().toString()) {
+            case "All" -> {
+                helperTB.clearTable();
+                helperTB.setHeader("Tag,Name,Factible,Jira,Outline");
+                for (Gherkin item : featureControl.listGherkin()) {
+                    if (item.isIsOutline()) {
+                        total += featureControl.expandScenarioOutlines(item.getBlok()).size();
+                        for (String i : featureControl.expandScenarioOutlines(item.getBlok())) {
+                            helperTB.addItemOutline(item, i);
+                            fac+=item.fac;
+                        }
+                    } else {
+                        total += 1;
+                        helperTB.addItem(item);
+                    }
+                    txtFactible.setText(item.fac+"");
+                }
+            }
+            case "Outlines" -> {
+                helperTB.clearTable();
+                helperTB.setHeader("Tag,Name,Factible,Jira,Outline");
+                for (Gherkin item : featureControl.listGherkin()) {
+                    if (item.isIsOutline()) {
+                        txtOutline.setText(featureControl.expandScenarioOutlines(item.getBlok()).size() + "");
+                        
+                        for (String i : featureControl.expandScenarioOutlines(item.getBlok())) {
+                            helperTB.addItemOutline(item, i);
+                        }
+                    }
+                }
+            }
+            
+        }
+        setDataFeature(total + "", featureControl);
+    }//GEN-LAST:event_listViewItemStateChanged
+
+//GEN-FIRST:event_btnArchActionPerformed
+ 
+//GEN-LAST:event_btnArchActionPerformed
+
+    private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
+        // TODO add your handling code here:
+        featureText = fileControl.mostrarContenido();
+        txtScreen.setText(featureText);
+        listView.setSelectedItem("Select");
+        helperTB.clearTable();
+        featureControl = new FeatureControl(featureText);
+        if (!featureText.isEmpty()) {
+            listView.setSelectedItem("All");
+            nameFeature.setText(featureControl.getNameFeature());
+            
+        }
+    }//GEN-LAST:event_btnArchivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,8 +331,28 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnArchivo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JComboBox<String> listView;
+    private javax.swing.JLabel nameFeature;
+    private javax.swing.JTable tbGherkin;
+    private javax.swing.JTextField txtFactible;
+    private javax.swing.JTextField txtManual;
+    private javax.swing.JTextField txtNameFeature;
+    private javax.swing.JTextField txtOutline;
+    private javax.swing.JTextArea txtScreen;
     // End of variables declaration//GEN-END:variables
 }

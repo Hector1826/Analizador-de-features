@@ -42,9 +42,6 @@ public class FeatureModel {
         return listBlockGherkin;
     }
     
-    
-    
-    
     public int numberGherkin(){
         return listBlockGherkin.size();
     }

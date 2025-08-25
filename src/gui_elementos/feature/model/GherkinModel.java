@@ -59,7 +59,7 @@ public class GherkinModel {
      * @return Nombre del Gherkin
      */
     public String getNameGherkin(String item) {
-        return new FindPattern(item).getCoincidencie(Regex.NAME_GHERKIN_REGEX, 1);
+        return new FindPattern(item).getCoincidencie(Regex.NAME_GHERKIN_REGEX).replace("Scenario Outline:", "").replace("Scenario:", "").trim();
     }
 
     /**
@@ -75,14 +75,4 @@ public class GherkinModel {
         return new Gherkin(getTag(item), getNameGherkin(item), isManual(item), isOutLine(item),
                 isFactible(item), getJira(item).replace("@JIRA.", ""), item);
     }
-    /*
-    public GherkinManual getGherkinManual(String item){
-        return new GherkinManual(getTag(item), getNameGherkin(item), isManual(item), 
-                isOutLine(item), isFactible(item), getJira(item).replace("@JIRA.", ""));
-    }
-
-    public GherkinOutline getGherkinOutline(String item){
-        return new GherkinOutline(getTag(item), getNameGherkin(item), isManual(item), isOutLine(item), isFactible(item), item);
-    }
-     */
 }

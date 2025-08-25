@@ -77,8 +77,10 @@ public class FeatureControl {
     public int gherkinsFactibles() {
         int cont = 0;
         for (Gherkin g : listGherkin()) {
-            if (!g.isIsManual()) {
-                cont++;
+            if(g.isIsFactible()){
+                if (!g.isIsManual()) {
+                    cont++;
+                }
             }
         }
         return cont;

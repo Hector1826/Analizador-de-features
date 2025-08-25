@@ -79,4 +79,20 @@ public class Gherkin {
     public void setJira(String jira) {
         this.jira = jira;
     }
+    public int fac = 0;
+    /**
+     * Define si el gherkin es Manual o factible
+     * @param g Gherkin a evaliar
+     * @return Manual o si
+     */
+    public String factibilidad(Gherkin g){
+        if(g.isManual){
+            return "Manual";
+        }else if(g.isFactible){
+            fac++;
+            return "Si";
+            
+        }
+        return "Descartado";
+    }
 }
