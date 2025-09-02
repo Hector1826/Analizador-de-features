@@ -25,22 +25,44 @@ public class FeatureModel {
      */
     private void initScan(String feature) {
         listBlockGherkin = new ArrayList<>();
-        Pattern pattern = Pattern.compile(Regex.GHERKIS_REGEX,
-                Pattern.DOTALL);
+        Pattern pattern = Pattern.compile(Regex.GHERKIS_REGEX, Pattern.DOTALL);
         Matcher matcher = pattern.matcher(feature);
         while (matcher.find()) {
             listBlockGherkin
                     .add(matcher.group().trim());
         }
     }
+//    private String clearBlankLinea(String blok){
+//        String aux ="";
+//        for (String i : blok.split("\n")) {
+//            if(i.length() == 0 || i.isBlank() || ){
+//                aux += i+"\n";
+//            } else {
+//                System.err.println("Salto de línea en blanco");
+//            }
+//        }
+//        return aux;
+//    }
 
     /**
      * Retorna el blocke de texto que corresponde a cada gherkin
      * @return Listado en forma de blocl
      */
-    public List<String> getListGherkinsBlock(){        
+    public List<String> getListGherkinsBlock(){
+//        List<String> blocks = new ArrayList<>();
+//        for(String itemBlock: listBlockGherkin){
+//            
+//            String[] line = itemBlock.split("\n");
+//            for(String item: line){
+//                if(item.isEmpty() || item.isBlank()
+//                        
+//            }
+//        }
         return listBlockGherkin;
     }
+    
+//    private String[] clearLine(String [] lineas){
+//    }
     
     public int numberGherkin(){
         return listBlockGherkin.size();

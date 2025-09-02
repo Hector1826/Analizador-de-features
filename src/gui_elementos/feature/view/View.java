@@ -1,4 +1,3 @@
-
 package gui_elementos.feature.view;
 
 import gui_elementos.feature.control.FeatureControl;
@@ -12,7 +11,7 @@ import gui_elementos.feature.vo.Gherkin;
  * @author mtptulamac007
  */
 public class View extends JFrame {
-    
+
     private final FileControl fileControl;
     private FeatureControl featureControl;
     private HelperTable helperTB;
@@ -27,13 +26,27 @@ public class View extends JFrame {
         fileControl = new FileControl();
         helperTB = new HelperTable(tbGherkin);
         featureText = "";
+        txtScreen.setEditable(false);
+        btnAnalizar.setEnabled(checkEdit.isSelected());
     }
-    
+
+    private void infoAnalisis(String txtInfoFeature) {
+        txtScreen.setText(txtInfoFeature);
+        listView.setSelectedItem("Select");
+        helperTB.clearTable();
+        featureControl = new FeatureControl(txtInfoFeature);
+        if (!txtInfoFeature.isEmpty()) {
+            listView.setSelectedItem("All");
+            nameFeature.setText(featureControl.getNameFeature());
+
+        }
+    }
+
     private void setDataFeature(String fac, FeatureControl _featureControl) {
-        txtNameFeature.setText(fac);
+        txtTotalGherkis.setText(fac);
         txtManual.setText(_featureControl.gherkinsManuales() + "");
-        txtOutline.setText(_featureControl.gherkinsOutline() + "");
-        txtFactible.setText("" + helperTB.getFactibles());
+        txtFactibleManual.setText(_featureControl.gherkinsOutline() + "");
+        txtBackSmoke.setText("" + helperTB.getFactibles());
     }
 
     /**
@@ -55,14 +68,17 @@ public class View extends JFrame {
         tbGherkin = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtScreen = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        checkEdit = new javax.swing.JCheckBox();
+        btnAnalizar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtNameFeature = new javax.swing.JTextField();
-        txtFactible = new javax.swing.JTextField();
-        txtOutline = new javax.swing.JTextField();
+        txtTotalGherkis = new javax.swing.JTextField();
+        txtBackSmoke = new javax.swing.JTextField();
+        txtFactibleManual = new javax.swing.JTextField();
         txtManual = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
@@ -73,10 +89,15 @@ public class View extends JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Menu")));
 
-        listView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "All", "Outlines", "Manual", "@baken-smoke" }));
+        listView.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "All", "Outlines", "Manual", "@baken-smoke", "Manual-Factible" }));
         listView.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 listViewItemStateChanged(evt);
+            }
+        });
+        listView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listViewActionPerformed(evt);
             }
         });
 
@@ -137,6 +158,41 @@ public class View extends JFrame {
         txtScreen.setRows(5);
         jScrollPane3.setViewportView(txtScreen);
 
+        checkEdit.setText("Editar contenido");
+        checkEdit.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                checkEditStateChanged(evt);
+            }
+        });
+
+        btnAnalizar.setText("Analizar");
+        btnAnalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnalizarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(checkEdit)
+                .addGap(28, 28, 28)
+                .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkEdit)
+                    .addComponent(btnAnalizar))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -144,16 +200,21 @@ public class View extends JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
         );
@@ -168,23 +229,23 @@ public class View extends JFrame {
         jLabel3.setText("# Gherkis Manual");
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
-        jLabel4.setText("# Gherkis Outline");
+        jLabel4.setText("# Gherkis Fact - Manual");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         jLabel5.setText("# @baken-smoke");
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
 
-        txtNameFeature.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        txtNameFeature.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel4.add(txtNameFeature, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 90, 50));
+        txtTotalGherkis.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        txtTotalGherkis.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel4.add(txtTotalGherkis, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 90, 50));
 
-        txtFactible.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        txtFactible.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel4.add(txtFactible, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 90, 50));
+        txtBackSmoke.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        txtBackSmoke.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel4.add(txtBackSmoke, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 90, 50));
 
-        txtOutline.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        txtOutline.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel4.add(txtOutline, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 90, 50));
+        txtFactibleManual.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        txtFactibleManual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel4.add(txtFactibleManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 90, 50));
 
         txtManual.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         txtManual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -202,33 +263,27 @@ public class View extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nameFeature)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(nameFeature))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nameFeature)
-                        .addGap(39, 39, 39))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -241,38 +296,138 @@ public class View extends JFrame {
         // TODO add your handling code here:
         int total = 0;
         int fac = 0;
+        int contador = 0;
         switch (listView.getSelectedItem().toString()) {
             case "All" -> {
                 helperTB.clearTable();
                 helperTB.setHeader("Tag,Name,Factible,Jira,Outline");
+                contador = 0;
+                int ma = 0;
+                int facManu = 0;
                 for (Gherkin item : featureControl.listGherkin()) {
                     if (item.isIsOutline()) {
                         total += featureControl.expandScenarioOutlines(item.getBlok()).size();
                         for (String i : featureControl.expandScenarioOutlines(item.getBlok())) {
-                            helperTB.addItemOutline(item, i);
-                            fac+=item.fac;
+                            contador++;
+                            if (item.isIsFactible()) {
+                                fac++;
+                                if (item.isIsManual()) {
+                                    facManu++;
+                                }
+                            } else if (item.isIsManual()) {
+                                ma++;
+                            }
+                            helperTB.addItemOutline(item, i, contador);
+
                         }
                     } else {
-                        total += 1;
-                        helperTB.addItem(item);
+                        if (item.isIsFactible()) {
+                            fac++;
+                            if (item.isIsManual()) {
+                                facManu++;
+                            }
+                        } else if (item.isIsManual()) {
+                            ma++;
+                        }
+                        contador++;
+                        helperTB.addItem(item, contador);
                     }
-                    txtFactible.setText(item.fac+"");
+
                 }
+                txtBackSmoke.setText(fac + "");
+                txtFactibleManual.setText(facManu+"");
+                txtTotalGherkis.setText("" + contador);
+                txtManual.setText(""+ma);
             }
             case "Outlines" -> {
                 helperTB.clearTable();
                 helperTB.setHeader("Tag,Name,Factible,Jira,Outline");
+                contador = 0;
                 for (Gherkin item : featureControl.listGherkin()) {
+
                     if (item.isIsOutline()) {
-                        txtOutline.setText(featureControl.expandScenarioOutlines(item.getBlok()).size() + "");
-                        
+                        txtFactibleManual.setText(featureControl.expandScenarioOutlines(item.getBlok()).size() + "");
+
                         for (String i : featureControl.expandScenarioOutlines(item.getBlok())) {
-                            helperTB.addItemOutline(item, i);
+                            contador++;
+                            helperTB.addItemOutline(item, i, contador);
                         }
                     }
                 }
             }
-            
+            case "Manual" -> {
+                helperTB.clearTable();
+                helperTB.setHeader("Tag,Name,Factible,Jira,Outline");
+                contador = 0;
+                int manual = 0;
+                for (Gherkin item : featureControl.listGherkin()) {
+                    if (item.isIsManual()) {
+                        manual++;
+                        txtFactibleManual.setText(featureControl.expandScenarioOutlines(item.getBlok()).size() + "");
+                        if (item.isIsOutline()) {
+                            for (String i : featureControl.expandScenarioOutlines(item.getBlok())) {
+
+                                contador++;
+                                helperTB.addItemOutline(item, i, contador);
+                            }
+                        } else {
+                            total += 1;
+                            contador++;
+                            helperTB.addItem(item, contador);
+                        }
+                    }
+                }
+                txtManual.setText(manual + "");
+            }
+            case "@baken-smoke" -> {
+                helperTB.clearTable();
+                helperTB.setHeader("Tag,Name,Factible,Jira,Outline");
+                int f = 0;
+                contador = 0;
+                for (Gherkin item : featureControl.listGherkin()) {
+                    if (item.isIsFactible()) {
+
+                        txtFactibleManual.setText(featureControl.expandScenarioOutlines(item.getBlok()).size() + "");
+                        if (item.isIsOutline()) {
+                            for (String i : featureControl.expandScenarioOutlines(item.getBlok())) {
+                                f++;
+                                contador++;
+                                helperTB.addItemOutline(item, i, contador);
+                            }
+                        } else {
+                            f++;
+                            contador++;
+                            helperTB.addItem(item, contador);
+                        }
+                    }
+                }
+                txtManual.setText(f + "");
+            }
+            case "Manual-Factible" -> {
+                helperTB.clearTable();
+                helperTB.setHeader("Tag,Name,Factible,Jira,Outline");
+                int f = 0;
+                contador = 0;
+                for (Gherkin item : featureControl.listGherkin()) {
+                    if (item.isIsFactible() && item.isIsManual()) {
+
+                        txtFactibleManual.setText(featureControl.expandScenarioOutlines(item.getBlok()).size() + "");
+                        if (item.isIsOutline()) {
+                            for (String i : featureControl.expandScenarioOutlines(item.getBlok())) {
+                                f++;
+                                contador++;
+                                helperTB.addItemOutline(item, i, contador);
+                            }
+                        } else {
+                            f++;
+                            contador++;
+                            helperTB.addItem(item, contador);
+                        }
+                    }
+                }
+                txtManual.setText(f + "");
+            }
+
         }
         setDataFeature(total + "", featureControl);
     }//GEN-LAST:event_listViewItemStateChanged
@@ -284,16 +439,32 @@ public class View extends JFrame {
     private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
         // TODO add your handling code here:
         featureText = fileControl.mostrarContenido();
-        txtScreen.setText(featureText);
-        listView.setSelectedItem("Select");
-        helperTB.clearTable();
-        featureControl = new FeatureControl(featureText);
-        if (!featureText.isEmpty()) {
-            listView.setSelectedItem("All");
-            nameFeature.setText(featureControl.getNameFeature());
-            
-        }
+        infoAnalisis(featureText);
+
     }//GEN-LAST:event_btnArchivoActionPerformed
+
+    private void listViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listViewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listViewActionPerformed
+    private void statusElemnetCheck(boolean flag) {
+        btnArchivo.setEnabled(flag);
+        checkEdit.setSelected(flag);
+        txtScreen.setEditable(flag);
+    }
+    private void checkEditStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkEditStateChanged
+        btnAnalizar.setEnabled(checkEdit.isSelected());
+        txtScreen.setEditable(true);
+
+    }//GEN-LAST:event_checkEditStateChanged
+
+    private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
+        // TODO add your handling code here:
+        statusElemnetCheck(false);
+        btnAnalizar.setEnabled(false);
+        checkEdit.setSelected(false);
+
+        infoAnalisis(txtScreen.getText());
+    }//GEN-LAST:event_btnAnalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,13 +502,16 @@ public class View extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAnalizar;
     private javax.swing.JButton btnArchivo;
+    private javax.swing.JCheckBox checkEdit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
@@ -349,10 +523,10 @@ public class View extends JFrame {
     private javax.swing.JComboBox<String> listView;
     private javax.swing.JLabel nameFeature;
     private javax.swing.JTable tbGherkin;
-    private javax.swing.JTextField txtFactible;
+    private javax.swing.JTextField txtBackSmoke;
+    private javax.swing.JTextField txtFactibleManual;
     private javax.swing.JTextField txtManual;
-    private javax.swing.JTextField txtNameFeature;
-    private javax.swing.JTextField txtOutline;
     private javax.swing.JTextArea txtScreen;
+    private javax.swing.JTextField txtTotalGherkis;
     // End of variables declaration//GEN-END:variables
 }

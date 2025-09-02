@@ -12,14 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/mtptulamac007/NetBeansProjects/GUI_Elementos-Feature/src/gui_elementos/feature/GUI_ElementosFeature.java</file>
+            <file>file:/Users/mtptulamac007/NetBeansProjects/GUI_Elementos-Feature/src/gui_elementos/feature/view/View.java</file>
             <file>file:/Users/mtptulamac007/NetBeansProjects/GUI_Elementos-Feature/src/gui_elementos/feature/view/GUIElements.java</file>
-            <file>file:/Users/mtptulamac007/NetBeansProjects/GUI_Elementos-Feature/src/gui_elementos/feature/vo/Gherkin.java</file>
-            <file>file:/Users/mtptulamac007/NetBeansProjects/GUI_Elementos-Feature/src/gui_elementos/feature/model/GherkinModel.java</file>
             <file>file:/Users/mtptulamac007/NetBeansProjects/GUI_Elementos-Feature/src/gui_elementos/feature/utils/Regex.java</file>
             <file>file:/Users/mtptulamac007/NetBeansProjects/GUI_Elementos-Feature/src/gui_elementos/feature/utils/FileControl.java</file>
             <file>file:/Users/mtptulamac007/NetBeansProjects/GUI_Elementos-Feature/src/gui_elementos/feature/control/FeatureControl.java</file>
-            <file>file:/Users/mtptulamac007/NetBeansProjects/GUI_Elementos-Feature/src/gui_elementos/feature/model/FindPattern.java</file>
-            <file>file:/Users/mtptulamac007/NetBeansProjects/GUI_Elementos-Feature/src/gui_elementos/feature/model/FeatureModel.java</file>
         </group>
     </open-files>
 </project-private>

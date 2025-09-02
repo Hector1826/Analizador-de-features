@@ -90,7 +90,7 @@ public class Gherkin {
             return "Manual";
         }else if(g.isFactible){
             fac++;
-            return "Si";
+            return "Factible";
             
         }
         return "Descartado";

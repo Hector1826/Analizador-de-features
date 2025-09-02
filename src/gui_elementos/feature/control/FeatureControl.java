@@ -108,7 +108,8 @@ public class FeatureControl {
     }
 
     public List<String> expandScenarioOutlines(String featureContent) {
-        String regex = "Scenario Outline:\\s*(.+?)\\n([\\s\\S]*?)Examples:\\s*\\n([\\s\\S]*?)(?=\\n\\s*\\n|\\z)";
+        //String regex = "Scenario Outline:\\s*(.+?)\\n([\\s\\S]*?)Examples:\\s*\\n([\\s\\S]*?)(?=\\n\\s*\\n|\\z)";
+        String regex = "(?s)Scenario Outline:\\s*(.+?)\\n([\\s\\S]*?)(?:\\n(?:@.*|#.*|\\s*)*)?Examples:\\s*\\n([\\s\\S]*?)(?=\\n\\s*\\n|\\Z)";
         List<String> scenarioNames = new ArrayList<>();
         Pattern outlinePattern = Pattern.compile(regex,
                 Pattern.MULTILINE);

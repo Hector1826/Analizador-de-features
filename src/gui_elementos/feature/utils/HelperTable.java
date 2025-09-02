@@ -25,13 +25,13 @@ public class HelperTable {
      * @param _header encabezados separados por comas ß
      */
     public void setHeader(String _header) {
-        model.setColumnIdentifiers(_header.split(","));
+        model.setColumnIdentifiers(("N°,"+_header).split(","));
         table.setModel(model);
-
     }
 
-    public void addItem(Gherkin _gherkin) {
+    public void addItem(Gherkin _gherkin, int contador) {
         model.addRow(new Object[]{
+            contador,
             _gherkin.getTag(),
             _gherkin.getName(),
             _gherkin.factibilidad(_gherkin),
@@ -42,8 +42,9 @@ public class HelperTable {
             factibles++;
     }
 
-    public void addItemOutline(Gherkin _gherkin, String i) {
+    public void addItemOutline(Gherkin _gherkin, String i, int contador) {
         model.addRow(new Object[]{
+            contador,
             _gherkin.getTag(),
             i,
             _gherkin.factibilidad(_gherkin),
@@ -65,6 +66,11 @@ public class HelperTable {
     }
     public String printInfo(String ac) {
         return ac;
+    }
+    
+    
+    public void muestra(String type){
+        
     }
 
 }

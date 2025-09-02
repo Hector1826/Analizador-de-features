@@ -9,8 +9,10 @@ package gui_elementos.feature.utils;
 public class Regex {
      /**
      * Expression regular para encontrar los gherkins en un archivo .feature.
-     */
-    public static final String GHERKIS_REGEX = "@[A-Z]{2,4}[0-9]{3}.*?(?:\\n\\s*\\n|$)";
+     * @DFAD234
+     * @FD215
+                                                                        
+    //public static final String GHERKIS_REGEX = "@[A-Z]{2,4}[0-9]{3}.*?(?:\\n\\s*\\n|$)";
 
     /**
      * Expression regular para encontrar el nombrere de la Feature
@@ -59,4 +61,6 @@ public class Regex {
     public static final String TABLE_EXAMPLE = "Examples:";
     
     public static final String TAG_JIRA = "@JIRA.\\b[A-Z]{2,10}-\\d+\\b";
+    
+    public static final String GHERKIS_REGEX = "@[A-Z]{2,4}[0-9]{3}.*?(?:\\n\\s*\\n|$)";
 }

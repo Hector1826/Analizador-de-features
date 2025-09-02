@@ -23,7 +23,7 @@ public class FileControl {
      * Abre ventana para seleccionar el archivo que se requiere analizar
      */
     private File selectFile( ) {
-        File directorioInicial = new File("/Users/mtptulamac007/Desktop/Releases repor/R25.80-Spherica/glomo-mx/test/e2e/lib/features/epics"); // Reemplaza con la ruta deseada
+        File directorioInicial = new File("/Users/mtptulamac007/Desktop/Releases repor/glomo-mx/test/e2e/lib/features/epics"); // Reemplaza con la ruta deseada
         fileChooser.setCurrentDirectory(directorioInicial);
         int seleccion = fileChooser.showOpenDialog(null);
         File archivo = null;
